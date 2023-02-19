@@ -17,8 +17,8 @@ const LoginSignUp = (props) => {
     const dispatch = useDispatch();
     const alert = useAlert();
     const [toggle, setToggle] = useState(true);
-    const [loginEmail, setLoginEmail] = useState("");
-    const [loginPass, setLoginPass] = useState("");
+    const [loginEmail, setLoginEmail] = useState("sushilrawat1720@gmail.com");
+    const [loginPass, setLoginPass] = useState("sushilrawat1720@gmail.com");
     const [pass, showPass] = useState("password");
     const changeShowPass = () => {
         showPass(pass === "password" ? "text" : "password");

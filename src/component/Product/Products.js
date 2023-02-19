@@ -52,7 +52,7 @@ const Products = () => {
                 <Fragment>
                     <MetaData title="PRODUCTS SNAPHAVEN" />
 
-                    <div className="mt-5 h-full border">
+                    <div className="mt-5 h-full border bg-white">
                         <h1 className="text-center font-oxygen font-bold text-3xl pb-2 border-b-2 max-w-xs mt-5 m-auto border-[c4c9d1]">
                             Products
                         </h1>

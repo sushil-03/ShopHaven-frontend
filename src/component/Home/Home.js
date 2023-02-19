@@ -4,8 +4,7 @@ import MetaData from "../layout/MetaData.js";
 import { clearError, getProduct } from "../../actions/productAction.js";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../layout/Loader/loader.js";
-
-import Carousel from "react-material-ui-carousel";
+import { Image, Shimmer } from "react-shimmer";
 
 import { useAlert } from "react-alert";
 import { loadUser } from "../../actions/userAction.js";
@@ -26,34 +25,6 @@ const Home = () => {
         dispatch(loadUser());
     }, [dispatch, error, alert]);
 
-    const items = [
-        {
-            url: "/home.jpg",
-        },
-        {
-            url: "https://res.cloudinary.com/dlv5hu0eq/image/upload/v1661674439/carousel/daniel-romero-uLgSAoYcfHQ-unsplash_k5umuu.jpg",
-        },
-        {
-            url: " https://res.cloudinary.com/dlv5hu0eq/image/upload/v1661674439/carousel/daniel-romero-Zq07dSZBTqg-unsplash_gxcnho.jpg",
-        },
-        {
-            url: "https://res.cloudinary.com/dlv5hu0eq/image/upload/v1661674438/carousel/salman-hossain-saif-t2Q90MBUP78-unsplash_o9blcf.jpg",
-        },
-
-        {
-            url: "https://res.cloudinary.com/dlv5hu0eq/image/upload/v1661612663/c-d-x-PDX_a_82obo-unsplash_qjrfli.jpg",
-        },
-    ];
-
-    function Item({ item }) {
-        return (
-            <img
-                src={item.url}
-                alt=""
-                className=" bg-contain w-full h-full    overflow-hidden"
-            />
-        );
-    }
     return (
         <div className="relative h-screen w-screen">
             <MetaData title="ShopHaven" />
@@ -62,17 +33,13 @@ const Home = () => {
             ) : (
                 <Fragment>
                     <div className="relative  w-full sm:h-2/6  md:h-3/5 lg:h-5/6  h-1/4  overflow-hidden  ">
-                        <div className="absolute w-full h-full   -z-10 overflow-hidden md:top-0 top-3">
-                            <Carousel
-                                interval={4000}
-                                swipe={true}
-                                indicators={false}
-                                className="overflow-hidden"
-                            >
-                                {items.map((item, i) => (
-                                    <Item key={i} item={item} />
-                                ))}
-                            </Carousel>
+                        <div className="absolute w-full h-full   -z-10 overflow-hidden md:top-0 top-3 bg-gradient-to-r from-cyan-500 to-blue-500">
+                            <Image
+                                src="/home.jpg"
+                                alt=""
+                                className=" bg-contain w-full h-full  "
+                                fallback={<Shimmer width={800} height={600} />}
+                            />
                         </div>
                         <div className=" h-full   flex flex-col items-center justify-center ">
                             <p className="md:mb-5 mb-2 text-4xl sm:text-6xl text-center drop-shadow-2xl	 shadow-xl select-none md:text-8xl  font-rancho font-bold bg-clip-text">

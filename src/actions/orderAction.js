@@ -21,6 +21,8 @@ import {
 } from "../constants/orderConstant";
 import axios from "axios";
 axios.defaults.baseURL = "https://shophaven-backend.vercel.app/";
+// axios.defaults.baseURL = "http://localhost:3001";
+
 //Create Order
 export const createOrder = (order) => async (dispatch) => {
     try {

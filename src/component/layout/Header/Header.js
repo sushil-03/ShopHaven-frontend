@@ -154,6 +154,15 @@ const Header = ({ isAuthenticated = false }) => {
                                         <CgLogIn size="1.5rem" />
                                     </Link>
                                 )}
+                                {/* {!isAuthenticated ? (
+                                    <Link to="/login">
+                                        <CgLogIn size="1.5rem" />
+                                    </Link>
+                                ) : (
+                                    <Link to="/login">
+                                        <CgLogOut size="15rem" />
+                                    </Link>
+                                )} */}
                             </div>
 
                             <div
@@ -234,19 +243,32 @@ const Header = ({ isAuthenticated = false }) => {
                                 Cart
                             </motion.span>
                         </Link>
-                        {!isAuthenticated && (
-                            <Link
-                                to="/login"
-                                className="flex items-center gap-4 py-1"
-                            >
-                                <motion.span
-                                    className="text-lg"
-                                    variants={listVariant}
+                        {
+                            !isAuthenticated && (
+                                <Link
+                                    to="/login"
+                                    className="flex items-center gap-4 py-1"
                                 >
-                                    Login
-                                </motion.span>
-                            </Link>
-                        )}
+                                    <motion.span
+                                        className="text-lg"
+                                        variants={listVariant}
+                                    >
+                                        Login
+                                    </motion.span>
+                                </Link>
+                            )
+                            //     : <Link
+                            //     to="/"
+                            //     className="flex items-center gap-4 py-1"
+                            // >
+                            //     <motion.span
+                            //         className="text-lg"
+                            //         variants={listVariant}
+                            //     >
+                            //         Login
+                            //     </motion.span>
+                            // </Link>
+                        }
                     </ul>
                 </motion.div>
             ) : (

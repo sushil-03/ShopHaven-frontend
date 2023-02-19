@@ -40,11 +40,15 @@ import {
     UPDATE_USER_ROLE_SUCCESS,
     UPDATE_USER_ROLE_FAIL,
 } from "../constants/userConstant";
+// axios.defaults.baseURL = "http://localhost:3001";
 axios.defaults.baseURL = "https://shophaven-backend.vercel.app/";
 export const login = (email, password) => async (dispatch) => {
     try {
         dispatch({ type: LOGIN_REQUEST });
-        let config = { headers: { "Content-Type": "application/json" } };
+        let config = {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+        };
 
         const response = await axios.post(
             `/api/v1/login`,

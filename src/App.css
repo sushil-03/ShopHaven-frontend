@@ -3,77 +3,241 @@
 @tailwind utilities;
 
 * {
-  overflow: none;
-  margin: 0;
-  padding: 0;
-  scroll-behavior: smooth;
+    overflow: none;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 .homeBack {
-  /* box-shadow: 0px -16px 15px 0px rgba(42, 129, 182, 0.75); */
-  box-shadow: 0px -80px 0px 0px rgba(40, 128, 185, 1);
-  /* box-shadow: 0px -59px 0px 0px rgba(22, 117, 185, 0); */
+    /* box-shadow: 0px -16px 15px 0px rgba(42, 129, 182, 0.75); */
+    box-shadow: 0px -80px 0px 0px rgba(40, 128, 185, 1);
+    /* box-shadow: 0px -59px 0px 0px rgba(22, 117, 185, 0); */
 
-  background: linear-gradient(to top, #ffffff, #6dd5fa, #2980b9);
+    background: linear-gradient(to top, #ffffff, #6dd5fa, #2980b9);
 }
 .rotation {
-  animation: loading 800ms linear infinite;
+    animation: loading 800ms linear infinite;
 }
 @keyframes loading {
-  to {
-    transform: rotate(360deg);
-  }
+    to {
+        transform: rotate(360deg);
+    }
 }
 .productBack {
-  background: linear-gradient(to top, #ece9e6, #ffffff);
+    background: linear-gradient(to top, #ece9e6, #ffffff);
 }
 .searchBack {
-  background: #e0eafc; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #cfdef3,
-    #e0eafc
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #cfdef3,
-    #e0eafc
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #e0eafc; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+        to right,
+        #cfdef3,
+        #e0eafc
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #cfdef3,
+        #e0eafc
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-  box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.25);
-  /* -webkit-box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.25);
+    /* -webkit-box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.75); */
 }
 .pagination {
-  display: flex;
-  justify-content: center;
-  margin: 6vmax;
-  align-item: center;
+    display: flex;
+    justify-content: center;
+    margin: 6vmax;
+    align-item: center;
 }
 
 .MuiDataGrid-columnHeader div {
-  color: "red";
+    color: "red";
 }
 .MuiDataGrid-columnHeaderTitle {
-  color: "red";
-  font: bold;
+    color: "red";
+    font: bold;
 }
 .shadowTest:before {
-  content: "";
-  position: absolute;
-  bottom: 10px;
-  left: 5%;
-  width: 90%;
-  height: 20%;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 50%;
-  z-index: -1;
-  filter: blur(10px);
+    content: "";
+    position: absolute;
+    bottom: 10px;
+    left: 5%;
+    width: 90%;
+    height: 20%;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    z-index: -1;
+    filter: blur(10px);
+}
+
+.bike {
+    display: block;
+    margin: auto;
+    width: 16em;
+    height: auto;
+}
+.bike__body,
+.bike__front,
+.bike__handlebars,
+.bike__pedals,
+.bike__pedals-spin,
+.bike__seat,
+.bike__spokes,
+.bike__spokes-spin,
+.bike__tire {
+    animation: bikeBody 3s ease-in-out infinite;
+    stroke: var(--primary);
+    transition: stroke var(--trans-dur);
+}
+.bike__front {
+    animation-name: bikeFront;
+}
+.bike__handlebars {
+    animation-name: bikeHandlebars;
+}
+.bike__pedals {
+    animation-name: bikePedals;
+}
+.bike__pedals-spin {
+    animation-name: bikePedalsSpin;
+}
+.bike__seat {
+    animation-name: bikeSeat;
+}
+.bike__spokes,
+.bike__tire {
+    stroke: currentColor;
+}
+.bike__spokes {
+    animation-name: bikeSpokes;
+}
+.bike__spokes-spin {
+    animation-name: bikeSpokesSpin;
+}
+.bike__tire {
+    animation-name: bikeTire;
+}
+
+/* Dark theme */
+
+/* Animations */
+@keyframes bikeBody {
+    from {
+        stroke-dashoffset: 79;
+    }
+    33%,
+    67% {
+        stroke-dashoffset: 0;
+    }
+    to {
+        stroke-dashoffset: -79;
+    }
+}
+@keyframes bikeFront {
+    from {
+        stroke-dashoffset: 19;
+    }
+    33%,
+    67% {
+        stroke-dashoffset: 0;
+    }
+    to {
+        stroke-dashoffset: -19;
+    }
+}
+@keyframes bikeHandlebars {
+    from {
+        stroke-dashoffset: 10;
+    }
+    33%,
+    67% {
+        stroke-dashoffset: 0;
+    }
+    to {
+        stroke-dashoffset: -10;
+    }
+}
+@keyframes bikePedals {
+    from {
+        animation-timing-function: ease-in;
+        stroke-dashoffset: -25.133;
+    }
+    33%,
+    67% {
+        animation-timing-function: ease-out;
+        stroke-dashoffset: -21.991;
+    }
+    to {
+        stroke-dashoffset: -25.133;
+    }
+}
+@keyframes bikePedalsSpin {
+    from {
+        transform: rotate(0.1875turn);
+    }
+    to {
+        transform: rotate(3.1875turn);
+    }
+}
+@keyframes bikeSeat {
+    from {
+        stroke-dashoffset: 5;
+    }
+    33%,
+    67% {
+        stroke-dashoffset: 0;
+    }
+    to {
+        stroke-dashoffset: -5;
+    }
+}
+@keyframes bikeSpokes {
+    from {
+        animation-timing-function: ease-in;
+        stroke-dashoffset: -31.416;
+    }
+    33%,
+    67% {
+        animation-timing-function: ease-out;
+        stroke-dashoffset: -23.562;
+    }
+    to {
+        stroke-dashoffset: -31.416;
+    }
+}
+@keyframes bikeSpokesSpin {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(3turn);
+    }
+}
+@keyframes bikeTire {
+    from {
+        animation-timing-function: ease-in;
+        stroke-dashoffset: 56.549;
+        transform: rotate(0);
+    }
+    33% {
+        stroke-dashoffset: 0;
+        transform: rotate(0.33turn);
+    }
+    67% {
+        animation-timing-function: ease-out;
+        stroke-dashoffset: 0;
+        transform: rotate(0.67turn);
+    }
+    to {
+        stroke-dashoffset: -56.549;
+        transform: rotate(1turn);
+    }
 }

@@ -9,7 +9,12 @@ axios.defaults.baseURL = "https://shophaven-backend.vercel.app/";
 // axios.defaults.baseURL = "http://localhost:3001";
 
 export const addItemsToCart = (id, quantity) => async (dispatch, getState) => {
-    const { data } = await axios.get(`/api/v1/product/${id}`);
+    let config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+    };
+
+    const { data } = await axios.get(`/api/v1/product/${id}`, config);
     dispatch({
         type: ADD_TO_CART,
         payload: {

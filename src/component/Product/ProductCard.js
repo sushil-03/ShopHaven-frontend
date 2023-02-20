@@ -8,7 +8,7 @@ const ProductCard = ({ product }) => {
         <>
             <Link
                 to={`/product/${product._id}`}
-                className=" text-[rgb(48,48,48)]  flex flex-col transition-all shadow-md duration-200 pb-3 rounded-lg  w-[20rem]  h-[27rem] flex-wrap  justify-between relative border hover:bg-gray-200 hover:border-2 hover:border-gray-300 group"
+                className=" text-[rgb(48,48,48)]  flex flex-col transition-all shadow-md duration-200 pb-3 rounded-lg  w-[20rem]  h-[25rem] flex-wrap  justify-between relative border hover:bg-gray-200 hover:border-2 hover:border-gray-300 group"
             >
                 <div>
                     <div className=" object-fit rounded-t-lg  z-30 absolute w-full h-5/6 top-0 p-1">

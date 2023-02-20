@@ -7,7 +7,10 @@ import { IconContext } from "react-icons";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../../../actions/userAction";
 const Header = ({ isAuthenticated = false }) => {
+    const dispatch = useDispatch();
     const rootWidth = document.getElementById("root").clientWidth;
     const navigate = useNavigate();
     const searchSubmitButton = (args) => {
@@ -243,32 +246,34 @@ const Header = ({ isAuthenticated = false }) => {
                                 Cart
                             </motion.span>
                         </Link>
-                        {
-                            !isAuthenticated && (
-                                <Link
-                                    to="/login"
-                                    className="flex items-center gap-4 py-1"
+                        {!isAuthenticated ? (
+                            <Link
+                                to="/login"
+                                className="flex items-center gap-4 py-1"
+                            >
+                                <motion.span
+                                    className="text-lg"
+                                    variants={listVariant}
                                 >
-                                    <motion.span
-                                        className="text-lg"
-                                        variants={listVariant}
-                                    >
-                                        Login
-                                    </motion.span>
-                                </Link>
-                            )
-                            //     : <Link
-                            //     to="/"
-                            //     className="flex items-center gap-4 py-1"
-                            // >
-                            //     <motion.span
-                            //         className="text-lg"
-                            //         variants={listVariant}
-                            //     >
-                            //         Login
-                            //     </motion.span>
-                            // </Link>
-                        }
+                                    Login
+                                </motion.span>
+                            </Link>
+                        ) : (
+                            <span
+                                onClick={() => {
+                                    dispatch(logout());
+                                    alert.success("Log Out Successfully");
+                                }}
+                                className="flex items-center gap-4 py-1 cursor-pointer"
+                            >
+                                <motion.span
+                                    className="text-lg"
+                                    variants={listVariant}
+                                >
+                                    Logout
+                                </motion.span>
+                            </span>
+                        )}
                     </ul>
                 </motion.div>
             ) : (

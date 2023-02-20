@@ -10,9 +10,9 @@ import Slider from "@mui/material/Slider";
 import MetaData from "../layout/MetaData.js";
 import { Button } from "@material-ui/core";
 const Products = () => {
-    const [price, setPrice] = useState([0, 100000]);
+    const [price, setPrice] = useState([0, 200000]);
     const [min, setMin] = useState(0);
-    const [max, setMax] = useState(100000);
+    const [max, setMax] = useState(200000);
     const [currentPage, setCurrentPage] = useState(1);
     const [rating, setRating] = useState(0);
     const dispatch = useDispatch();

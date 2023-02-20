@@ -33,7 +33,8 @@ const Home = () => {
             ) : (
                 <Fragment>
                     <div className="relative  w-full sm:h-2/6  md:h-3/5 lg:h-5/6  h-1/4  overflow-hidden  ">
-                        <div className="absolute w-full h-full   -z-10 overflow-hidden md:top-0 top-3 bg-gradient-to-r from-cyan-500 to-blue-500">
+                        {/* <div className="absolute w-full h-full   -z-10 overflow-hidden md:top-0 top-3 bg-gradient-to-r from-cyan-500 to-blue-500"> */}
+                        <div className="absolute w-full h-full   -z-10 overflow-hidden md:top-0 top-3 ">
                             <Image
                                 src="/home.jpg"
                                 alt=""

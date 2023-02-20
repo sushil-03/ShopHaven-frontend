@@ -227,14 +227,14 @@ const ProductDetails = () => {
                                     About this item :
                                 </span>
 
-                                <span className="font-oxygen font-semibold text-gray-500">
+                                <p className="font-oxygen font-semibold text-gray-500  md:pr-5 pr-2">
                                     <ul className="list-disc">
                                         {product.description &&
                                             descriptionItem.map((item, key) => (
                                                 <li key={key}>{item}</li>
                                             ))}
                                     </ul>
-                                </span>
+                                </p>
                             </div>
                             <Button
                                 variant="contained"

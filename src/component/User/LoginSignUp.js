@@ -100,11 +100,11 @@ const LoginSignUp = (props) => {
                                 {toggle ? (
                                     <form
                                         onSubmit={loginSubmit}
-                                        className="w-4/5  relative"
+                                        className="md:w-4/5  w-full relative "
                                     >
                                         <div className="w-full h-16  relative flex justify-center rounded-md items-center  transition-all duration-300 ease-in-out">
                                             <HiOutlineMail
-                                                className=" bg-white left-4 bg-transparent absolute "
+                                                className=" bg-white md:left-4 left-2 bg-transparent absolute "
                                                 size="2rem"
                                             />
                                             <TextField
@@ -118,9 +118,9 @@ const LoginSignUp = (props) => {
                                                 type="email"
                                             />
                                         </div>
-                                        <div className="w-full h-16    relative flex justify-center rounded-md items-center  transition-all duration-300 ease-in-out mt-2">
+                                        <div className="w-full h-16 relative flex justify-center rounded-md items-center  transition-all duration-300 ease-in-out mt-2">
                                             <RiLockPasswordLine
-                                                className=" bg-white left-4 bg-transparent absolute "
+                                                className=" bg-white md:left-4 left-2 bg-transparent absolute "
                                                 size="2rem"
                                             />
                                             <TextField

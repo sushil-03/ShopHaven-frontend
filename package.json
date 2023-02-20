@@ -64,5 +64,6 @@
     },
     "devDependencies": {
         "tailwindcss": "^3.0.13"
-    }
+    },
+    "proxy": "https://shophaven-backend.vercel.app/"
 }

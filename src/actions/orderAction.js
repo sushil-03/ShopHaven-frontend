@@ -20,7 +20,7 @@ import {
     UPDATE_ORDERS_SUCCESS,
 } from "../constants/orderConstant";
 import axios from "axios";
-axios.defaults.baseURL = "https://shophaven-backend.vercel.app/";
+axios.defaults.baseURL = "https://shophaven-backend.vercel.app";
 // axios.defaults.baseURL = "http://localhost:3001";
 
 //Create Order

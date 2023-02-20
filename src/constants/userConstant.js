@@ -54,4 +54,6 @@ export const DELETE_USER_SUCCESS = "DELETE_USER_SUCCESS";
 export const DELETE_USER_RESET = "DELETE_USER_RESET";
 export const DELETE_USER_FAIL = "DELETE_USER_FAIL";
 
+export const BASE_URL = "https://shophaven-backend.vercel.app/";
+// export const BASE_URL = "http://localhost:3001";
 export const CLEAR_ERROR = "CLEAR_ERROR";

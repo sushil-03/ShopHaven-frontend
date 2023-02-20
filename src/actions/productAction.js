@@ -30,9 +30,8 @@ import {
     DELETE_REVIEW_REQUEST,
     DELETE_REVIEW_FAIL,
 } from "../constants/productConstant";
-axios.defaults.baseURL = "https://shophaven-backend.vercel.app";
-// axios.defaults.baseURL = "http://localhost:3001";
-
+import { BASE_URL } from "../constants/userConstant";
+axios.defaults.baseURL = BASE_URL;
 export const getProduct =
     (
         keyword = "",

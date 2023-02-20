@@ -39,9 +39,11 @@ import {
     UPDATE_USER_ROLE_REQUEST,
     UPDATE_USER_ROLE_SUCCESS,
     UPDATE_USER_ROLE_FAIL,
+    BASE_URL,
 } from "../constants/userConstant";
 // axios.defaults.baseURL = "http://localhost:3001";
-axios.defaults.baseURL = "https://shophaven-backend.vercel.app";
+
+axios.defaults.baseURL = BASE_URL;
 
 export const login = (email, password) => async (dispatch) => {
     try {

@@ -8,7 +8,7 @@ import ProductDetail from "./component/Product/ProductDetails";
 import Products from "./component/Product/Products";
 import LoginSignUp from "./component/User/LoginSignUp";
 import store from "./store";
-import { loadUser } from "./actions/userAction";
+// import { loadUser } from "./actions/userAction";
 import { useSelector } from "react-redux";
 import UserOption from "./component/layout/UserOption";
 import Contact from "./component/layout/Contact.js";
@@ -32,24 +32,17 @@ import UpdateProduct from "./component/Admin/UpdateProduct.js";
 import UpdateOrder from "./component/Admin/UpdateOrder.js";
 import UserList from "./component/Admin/UserList.js";
 import ReviewList from "./component/Admin/ReviewList.js";
-import axios from "axios";
 
 //For Payment
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
+
 import OrderList from "./component/Admin/OrderList.js";
 //Getting font
 import Shipping from "./component/cart/Shipping.js";
-import Footer from "./component/layout/Footer/Footer";
 // const Shipping = lazy(() => import("./component/cart/Shipping.js"));
 
 function App() {
     const { isAuthenticated, user } = useSelector((state) => state.user);
-    const [stripeApiKey, setStripeApiKey] = useState("");
-    async function getStripeApiKey() {
-        const { data } = await axios.get("/api/v1/stripeapikey");
-        setStripeApiKey(data.stripeApikey);
-    }
+
     useEffect(() => {
         WebFont.load({
             google: {
@@ -65,8 +58,7 @@ function App() {
             },
         });
 
-        store.dispatch(loadUser());
-        getStripeApiKey();
+        // store.dispatch(loadUser());
     }, []);
 
     // window.addEventListener("contextmenu", (e) => e.preventDefault());
@@ -90,11 +82,9 @@ function App() {
                 <Route element={<ProtectedRoute />}>
                     <Route path="/account" element={<Profile user={user} />} />
                 </Route>
-
                 <Route element={<ProtectedRoute />}>
                     <Route path="/me/update" element={<UpdateProfile />} />
                 </Route>
-
                 <Route element={<ProtectedRoute />}>
                     <Route
                         path="/password/update"
@@ -106,9 +96,11 @@ function App() {
                 </Route>
                 <Route element={<ProtectedRoute />}>
                     <Route path="/order/confirm" element={<ConfirmOrder />} />
+                </Route>{" "}
+                <Route element={<ProtectedRoute />}>
+                    <Route path="/order/payment" element={<OrderSuccess />} />
                 </Route>
-
-                <Route
+                {/* <Route
                     path="process/payment"
                     element={
                         stripeApiKey && (
@@ -117,8 +109,7 @@ function App() {
                             </Elements>
                         )
                     }
-                ></Route>
-
+                ></Route> */}
                 <Route element={<ProtectedRoute />}>
                     <Route path="/success" element={<OrderSuccess />} />
                 </Route>
@@ -131,7 +122,6 @@ function App() {
                 <Route isAdmin={true} element={<ProtectedRoute />}>
                     <Route path="/admin/dashboard" element={<Dashboard />} />
                 </Route>
-
                 <Route isAdmin={true} element={<ProtectedRoute />}>
                     <Route path="/admin/products" element={<ProductList />} />
                 </Route>

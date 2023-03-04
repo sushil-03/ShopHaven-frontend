@@ -22,35 +22,35 @@ const Home = () => {
             dispatch(clearError());
         }
         dispatch(getProduct());
-        dispatch(loadUser());
+        // dispatch(loadUser());
     }, [dispatch, error, alert]);
 
     return (
-        <div className="relative h-screen w-screen">
+        <div className="relative w-screen h-screen">
             <MetaData title="ShopHaven" />
             {loading ? (
                 <Loader />
             ) : (
                 <Fragment>
-                    <div className="relative  w-full sm:h-2/6  md:h-3/5 lg:h-5/6  h-1/4  overflow-hidden  ">
-                        {/* <div className="absolute w-full h-full   -z-10 overflow-hidden md:top-0 top-3 bg-gradient-to-r from-cyan-500 to-blue-500"> */}
-                        <div className="absolute w-full h-full   -z-10 overflow-hidden md:top-0 top-3 ">
+                    <div className="relative w-full overflow-hidden sm:h-2/6 md:h-3/5 lg:h-5/6 h-1/4 ">
+                        {/* <div className="absolute w-full h-full overflow-hidden -z-10 md:top-0 top-3 bg-gradient-to-r from-cyan-500 to-blue-500"> */}
+                        <div className="absolute w-full h-full overflow-hidden -z-10 md:top-0 top-3 ">
                             <Image
                                 src="/home.jpg"
                                 alt=""
-                                className=" bg-contain w-full h-full  "
+                                className="w-full h-full bg-contain "
                                 fallback={<Shimmer width={800} height={600} />}
                             />
                         </div>
-                        <div className=" h-full   flex flex-col items-center justify-center ">
-                            <p className="md:mb-5 mb-2 text-4xl sm:text-6xl text-center drop-shadow-2xl	 shadow-xl select-none md:text-8xl  font-rancho font-bold bg-clip-text">
+                        <div className="flex flex-col items-center justify-center h-full ">
+                            <p className="mb-2 text-4xl font-bold text-center shadow-xl select-none md:mb-5 sm:text-6xl drop-shadow-2xl md:text-8xl font-rancho bg-clip-text">
                                 Welcome to ShopHaven
                             </p>
-                            <h1 className="sm:text-3xl text-xl font-semibold uppercase font-oxygen">
+                            <h1 className="text-xl font-semibold uppercase sm:text-3xl font-oxygen">
                                 Find it, love it, buy it.
                             </h1>
                             <a href="#container">
-                                <button className="border-2 flex items-center justify-between sm:p-3 p-1 md:mt-4 mt-2 rounded-lg font-semibold font-oxygen text-xl mx-2 hover:bg-black/75 hover:text-white transition-all duration-700 ">
+                                <button className="flex items-center justify-between p-1 mx-2 mt-2 text-xl font-semibold transition-all duration-700 border-2 rounded-lg sm:p-3 md:mt-4 font-oxygen hover:bg-black/75 hover:text-white ">
                                     Scroll&nbsp;&nbsp; <CgMouse />
                                 </button>
                             </a>
@@ -66,7 +66,7 @@ const Home = () => {
                     <Suspense fallback={<>Loading</>}>
                         <div
                             // id="container "
-                            className="container flex flex-wrap gap-14 mt-10   justify-center h-full items-center mx-auto w-full"
+                            className="container flex flex-wrap items-center justify-center w-full h-full mx-auto mt-10 gap-14"
                         >
                             {products &&
                                 products.map((product, i) => (

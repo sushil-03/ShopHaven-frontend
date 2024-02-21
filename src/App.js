@@ -2,7 +2,7 @@ import "./App.css";
 import Header from "./component/layout/Header/Header";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import WebFont from "webfontloader";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Home from "./component/Home/Home.js";
 import ProductDetail from "./component/Product/ProductDetails";
 import Products from "./component/Product/Products";

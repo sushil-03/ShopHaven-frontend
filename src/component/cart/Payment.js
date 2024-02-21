@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import CheckoutStep from "../cart/CheckoutStep.js";
 import { useSelector, useDispatch } from "react-redux";
 import MetaData from "../layout/MetaData";
@@ -28,6 +28,7 @@ const Payment = () => {
   const payBtn = useRef(null);
 
   const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
+  const [isLoading, setLoading] = useState(false);
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
   const token = cookies.get("shophaventoken");
   const order = {
@@ -45,6 +46,7 @@ const Payment = () => {
     amount: Math.round(orderInfo.totalPrice * 100),
   };
   const submitHandler = async (e) => {
+    setLoading(true);
     e.preventDefault();
     // dispatch(createOrder(order));
 
@@ -98,7 +100,9 @@ const Payment = () => {
           alert.error("There's some issue while processing payment");
         }
       }
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.log("errror", error);
       payBtn.current.disable = false;
       alert.error(error.response);
@@ -138,9 +142,14 @@ const Payment = () => {
             </div>
             <input
               type="submit"
-              value={`Pay - ${orderInfo && orderInfo.totalPrice}`}
+              value={
+                isLoading
+                  ? "Please wait..."
+                  : `Pay - ${orderInfo && orderInfo.totalPrice}`
+              }
               ref={payBtn}
-              className="p-4 text-lg font-bold text-white bg-red-600 rounded-lg font-roboto hover:bg-red-400"
+              disabled={isLoading}
+              className={`p-4 text-lg font-bold text-white bg-red-600 rounded-lg font-roboto hover:bg-red-400 disabled:bg-gray-600`}
             />
           </form>
         </div>

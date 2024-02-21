@@ -9,9 +9,8 @@ const CartCard = ({ item }) => {
   const decreaseQuantity = () => {
     const newQty = item.quantity - 1;
     if (newQty < 1) {
-      return;
-    }
-    dispatch(addItemsToCart(item.product_id, newQty));
+      dispatch(removeItemFromCart(item.product_id));
+    } else dispatch(addItemsToCart(item.product_id, newQty));
   };
   const increaseQuantity = () => {
     const newQty = item.quantity + 1;
@@ -24,30 +23,30 @@ const CartCard = ({ item }) => {
     dispatch(removeItemFromCart(item.product_id));
   };
   return (
-    <div className="flex mt-4 mb-4 justify-center">
-      <div className="detail w-2/4 flex md:flex-row flex-col pl-4">
+    <div className="flex justify-center mt-4 mb-4">
+      <div className="flex flex-col w-2/4 pl-4 detail md:flex-row">
         <img src={item.image} alt="" className="w-20 h-20 object-fit" />
-        <div className="text flex  flex-col justify-center p-2">
+        <div className="flex flex-col justify-center p-2 text">
           <Link
             to={`/product/${item.product_id}`}
-            className="font-roboto cursor-pointer"
+            className="cursor-pointer font-roboto"
           >
             {item.name}
           </Link>
-          <span className=" font-roboto cursor-pointer sm:hidden block">
+          <span className="block cursor-pointer font-roboto sm:hidden">
             Price: ₹{item.price}
           </span>
           <span
-            className="text-red-600 font-roboto cursor-pointer"
+            className="text-red-600 cursor-pointer font-roboto"
             onClick={removeItem}
           >
             Remove
           </span>
         </div>
       </div>
-      <div className="quantity w-1/4">
+      <div className="w-1/4 quantity">
         <button
-          className="font-bold rounded-full md:w-7 md:h-7  md:bg-slate-400 "
+          className="font-bold rounded-full md:w-7 md:h-7 md:bg-slate-400 "
           onClick={decreaseQuantity}
         >
           -
@@ -56,16 +55,16 @@ const CartCard = ({ item }) => {
           type="number"
           readOnly
           value={item.quantity}
-          className="md:w-16 w-9 outline-none border-none text-center"
+          className="text-center border-none outline-none md:w-16 w-9"
         />
         <button
-          className="font-bold rounded-full  md:w-7 md:h-7  md:bg-slate-400"
+          className="font-bold rounded-full md:w-7 md:h-7 md:bg-slate-400"
           onClick={increaseQuantity}
         >
           +
         </button>
       </div>
-      <div className="price w-1/4 font-roboto sm:block hidden">{`₹${item.price}`}</div>
+      <div className="hidden w-1/4 price font-roboto sm:block">{`₹${item.price}`}</div>
       <div className="w-1/4 font-roboto">{`₹${
         item.price * item.quantity
       }`}</div>

@@ -8,10 +8,10 @@ const ProductCard = ({ product }) => {
     <>
       <Link
         to={`/product/${product._id}`}
-        className=" text-[rgb(48,48,48)]  flex flex-col transition-all shadow-md duration-200 pb-3 rounded-lg  w-[20rem]  h-[25rem] flex-wrap  justify-between relative border hover:bg-gray-200 hover:border-2 hover:border-gray-300 group"
+        className=" text-[rgb(48,48,48)]  flex flex-col transition-all  duration-200 pb-3 rounded-lg  md:w-[20rem] w-[15rem] h-[20rem]  md:h-[24rem] flex-wrap  justify-between relative border hover:bg-gray-100 hover:border-2 hover:border-gray-200 group overflow-hidden   shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
       >
         <div>
-          <div className="absolute top-0 z-30 w-full p-1 rounded-t-lg object-fit h-5/6">
+          <div className="absolute top-0 z-30 w-full -mt-6 rounded-t-lg sm:p-1 object-fit h-5/6">
             <Image
               src={product.images[0].url}
               alt={product.name}
@@ -19,7 +19,7 @@ const ProductCard = ({ product }) => {
             />
           </div>
 
-          <div className="absolute w-full h-20 gap-2 p-8 bottom-4">
+          <div className="absolute w-full h-20 gap-2 p-4 md:p-8 bottom-4">
             <div className="flex flex-col items-center justify-around w-full p-2 text-center">
               <span className="w-full text-sm text-center uppercase sm:text-base font-roboto ">
                 {product.name}

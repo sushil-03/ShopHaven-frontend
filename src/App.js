@@ -39,6 +39,8 @@ import OrderList from "./component/Admin/OrderList.js";
 //Getting font
 import Shipping from "./component/cart/Shipping.js";
 // const Shipping = lazy(() => import("./component/cart/Shipping.js"));
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -63,6 +65,8 @@ function App() {
   }, []);
 
   // window.addEventListener("contextmenu", (e) => e.preventDefault());
+  const stripeApiKey =
+    "pk_test_51KQBF9SHmP4rOgFbUTX3QVWn9PCnCF4ZbO0AR5Q7PMSpCe8tUQAJJon0m8un2f30FEH8wXlaYiljh4WaePIa3i7W00zH83GKsB";
   return (
     <Router>
       <Header isAuthenticated={isAuthenticated} />
@@ -95,16 +99,16 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/order/payment" element={<OrderSuccess />} />
         </Route>
-        {/* <Route
-                    path="process/payment"
-                    element={
-                        stripeApiKey && (
-                            <Elements stripe={loadStripe(stripeApiKey)}>
-                                <Payment />
-                            </Elements>
-                        )
-                    }
-                ></Route> */}
+        <Route
+          path="process/payment"
+          element={
+            stripeApiKey && (
+              <Elements stripe={loadStripe(stripeApiKey)}>
+                <Payment />
+              </Elements>
+            )
+          }
+        ></Route>
         <Route element={<ProtectedRoute />}>
           <Route path="/success" element={<OrderSuccess />} />
         </Route>

@@ -31,38 +31,38 @@ const ConfirmOrder = () => {
   };
   return (
     <div>
-      <div className="w-full h-full m-auto grid place-items-center my-10">
+      <div className="grid w-full h-full m-auto my-10 place-items-center">
         <MetaData title="Confirm Order" />
-        <div className="container  w-full  h-screen rounded-lg border-2  m-auto shadow-2xl overflow-scroll pb-4">
+        <div className="container w-full h-screen pb-4 m-auto overflow-scroll border-2 rounded-lg shadow-2xl">
           <div className="mt-5">
             <CheckoutStep activeStep={1} />
           </div>
-          <div className=" flex justify-center md:flex-row items-center flex-col gap-5 mt-5">
+          <div className="flex flex-col items-center justify-center gap-5 mt-5 md:flex-row">
             <div className="md:w-1/2 md:border-r-2">
-              <div className=" mt-4 p-4 ">
-                <h1 className="p-4  font-bold text-2xl font-roboto">
+              <div className="p-4 mt-4 ">
+                <h1 className="p-4 text-2xl font-bold font-roboto">
                   Shipping Info
                 </h1>
                 <div className="px-4 font-roboto">
                   <div className="flex items-center gap-5 mb-2">
-                    <p className=" text-lg  ">Name: </p>
+                    <p className="text-lg ">Name: </p>
                     <span className="text-base text-gray-500">{user.name}</span>
                   </div>
                   <div className="flex items-center gap-5 mb-2">
-                    <p className=" text-lg  ">Phone: </p>
+                    <p className="text-lg ">Phone: </p>
                     <span className="text-base text-gray-500">
                       {shippingInfo.phoneNo}
                     </span>
                   </div>
                   <div className="flex items-center gap-5 mb-2">
-                    <p className=" text-lg  ">Address: </p>
+                    <p className="text-lg ">Address: </p>
                     <span className="text-base text-gray-500">{address}</span>
                   </div>
                 </div>
               </div>
 
-              <div className=" mt-4 p-4 ">
-                <h1 className="p-4 mb-4 font-semibold text-2xl font-roboto">
+              <div className="p-4 mt-4 ">
+                <h1 className="p-4 mb-4 text-2xl font-semibold font-roboto">
                   Your Cart Item
                 </h1>
                 {cartItems.map((item) => (
@@ -85,27 +85,27 @@ const ConfirmOrder = () => {
               </div>
             </div>
             <div className="my-4 p-4 font-roboto md:w-1/2 w-3/4 h-[20rem]  relative ">
-              <h1 className="p-4 mb-4 font-semibold text-2xl font-roboto ">
+              <h1 className="p-4 mb-4 text-2xl font-semibold font-roboto ">
                 Order Summary
               </h1>
 
-              <div className="flex  md:w-3/4 md:justify-around justify-between items-center font-roboto">
+              <div className="flex items-center justify-between md:w-3/4 md:justify-around font-roboto">
                 <div className="flex flex-col gap-3 ">
-                  <p className=" text-lg">Subtotal:</p>
-                  <p className=" text-lg ">Shipping Charge:</p>
-                  <p className=" text-lg">GST:</p>
-                  <p className=" text-xl mt-4">Total:</p>
+                  <p className="text-lg ">Subtotal:</p>
+                  <p className="text-lg ">Shipping Charge:</p>
+                  <p className="text-lg ">GST:</p>
+                  <p className="mt-4 text-xl ">Total:</p>
                 </div>
                 <div className="flex flex-col gap-3">
                   <p className="text-lg text-gray-500">₹{subtotal}</p>
                   <p className="text-lg text-gray-500">₹{shippingCharge}</p>
                   <p className="text-lg text-gray-500">₹{tax}</p>
-                  <p className="text-xl text-gray-500 mt-4 ">₹{totalPrice}</p>
+                  <p className="mt-4 text-xl text-gray-500 ">₹{totalPrice}</p>
                 </div>
                 <span className="w-[24rem]  border absolute border-gray-400 bottom-24 md:left-10 left-0"></span>
               </div>
-              <div className="  mt-4  " onClick={proceedToPayement}>
-                <button className=" md:p-4 md:w-full p-2 bg-red-600 font-roboto font-bold text-white hover:bg-red-400 ">
+              <div className="mt-4 " onClick={proceedToPayement}>
+                <button className="p-2 font-bold text-white bg-red-600 md:p-4 md:w-full font-roboto hover:bg-red-400">
                   Proceed To Payment
                 </button>
               </div>

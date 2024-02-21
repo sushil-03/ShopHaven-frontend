@@ -80,6 +80,7 @@ const MyOrders = () => {
     dispatch(myOrders());
     return () => dispatch(clearError());
   }, [alert, dispatch, error]);
+  console.log("my order", orders);
   return (
     <div>
       <MetaData title={`${user.name} - Orders`}></MetaData>

@@ -38,6 +38,7 @@ export const createOrder = (order) => async (dispatch) => {
       order,
       config
     );
+    console.log("new order created responsel", data);
     dispatch({ type: CREATE_ORDER_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -57,6 +58,7 @@ export const myOrders = () => async (dispatch) => {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     };
+    console.log("fetching my order");
     const { data } = await axios.get(
       `/api/v1/orders/me?token=${token}`,
       config

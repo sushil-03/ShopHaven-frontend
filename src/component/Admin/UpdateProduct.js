@@ -49,10 +49,15 @@ const UpdateProduct = () => {
     if (product && product._id !== id) {
       dispatch(getProductDetails(id));
     } else {
+      let descriptionItem = [];
+      if (product && product.description) {
+        descriptionItem = product.description.split("$");
+      }
+      let description = descriptionItem.join("\n");
       setName(product.name);
       setPrice(product.price);
       setStock(product.Stock);
-      setDescription(product.description);
+      setDescription(description);
       setCategory(product.category);
       setOldImage(product.images);
     }
@@ -98,19 +103,20 @@ const UpdateProduct = () => {
       reader.readAsDataURL(file);
     });
   };
+
   return (
     <div>
       <MetaData title="Create Products" />
-      <div className="w-screen h-screen m-auto grid place-items-center mt-10 border-t-2 overflow-scroll">
-        <div className="border w-full h-full flex ">
-          <div className="md:w-1/6 w-1/4">
+      <div className="grid w-screen h-screen m-auto mt-10 overflow-scroll border-t-2 place-items-center">
+        <div className="flex w-full h-full border ">
+          <div className="w-1/4 md:w-1/6">
             <SideBar />
           </div>
-          <div className="md:w-5/6 w-3/4  px-4 md:border-l-2">
-            <div className="header text-center font-roboto font-semibold ">
-              <h2 className="text-3xl my-3 font-roboto">UPDATE PRODUCTS</h2>
-              <div className="  w-min m-auto pt-5 flex gap-5 flex-col border px-16 pb-10 shadow-lg rounded-lg">
-                <div className="flex md:gap-8 gap-4 items-center  overflow-scroll">
+          <div className="w-3/4 px-4 md:w-5/6 md:border-l-2">
+            <div className="font-semibold text-center header font-roboto ">
+              <h2 className="my-3 text-3xl font-roboto">UPDATE PRODUCTS</h2>
+              <div className="flex flex-col w-5/6 gap-5 p-5 pt-10 m-auto mt-10 border rounded-lg shadow-lg md:w-1/2">
+                <div className="flex items-center gap-4 overflow-scroll md:gap-8">
                   <SpellcheckIcon />
                   <input
                     type="text"
@@ -121,36 +127,50 @@ const UpdateProduct = () => {
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>
-                <div className="flex md:gap-8 gap-4 items-center">
-                  <AttachMoneyIcon />
-                  <input
-                    type="number"
-                    placeholder="Price"
-                    required
-                    value={price}
-                    className="h-full border w-full font-roboto p-3  rounded-md  focus:outline-none focus:border-[#7960dc] focus:ring-1 focus:ring-[#7960dc]"
-                    onChange={(e) => setPrice(e.target.value)}
-                  />
+
+                <div className="flex flex-col justify-between gap-8 md:flex-row">
+                  <div className="flex items-center gap-4 md:gap-8">
+                    <AttachMoneyIcon />
+                    <input
+                      type="number"
+                      placeholder="Price"
+                      required
+                      value={price}
+                      className="h-full border w-full font-roboto p-3  rounded-md  focus:outline-none focus:border-[#7960dc] focus:ring-1 focus:ring-[#7960dc]"
+                      onChange={(e) => setPrice(e.target.value)}
+                    />
+                  </div>
+                  <div className="flex items-center gap-4 md:gap-8">
+                    <StorageIcon />
+                    <input
+                      type="number"
+                      placeholder="Stock"
+                      value={stock}
+                      className="h-full w-full border  font-roboto p-3  rounded-md  focus:outline-none focus:border-[#7960dc] focus:ring-1 focus:ring-[#7960dc]"
+                      onChange={(e) => setStock(e.target.value)}
+                    />
+                  </div>
                 </div>
-                <div className="flex md:gap-8 gap-4 items-center">
+
+                <div className="flex items-center gap-4 md:gap-8">
                   <DescriptionIcon />
                   <textarea
                     type="text"
                     placeholder="Product Description"
                     value={description}
-                    cols={19}
-                    row={5}
+                    cols={30}
+                    rows={6}
                     className="h-full border  w-full font-roboto p-3  rounded-md  focus:outline-none focus:border-[#7960dc] focus:ring-1 focus:ring-[#7960dc]"
                     onChange={(e) => setDescription(e.target.value)}
                   />
                 </div>
 
-                <div className="flex md:gap-8 gap-4 items-center rounded-lg outline-none">
+                <div className="flex items-center gap-4 rounded-lg outline-none md:gap-8">
                   <AccountTreeIcon />
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="p-2 w-full border"
+                    className="w-full p-4 border"
                   >
                     <option value=""> Choose Category</option>
                     {categories.map((cate, key) => (
@@ -159,16 +179,6 @@ const UpdateProduct = () => {
                   </select>
                 </div>
 
-                <div className="flex md:gap-8 gap-4 items-center">
-                  <StorageIcon />
-                  <input
-                    type="number"
-                    placeholder="Stock"
-                    value={stock}
-                    className="h-full w-full border  font-roboto p-3  rounded-md  focus:outline-none focus:border-[#7960dc] focus:ring-1 focus:ring-[#7960dc]"
-                    onChange={(e) => setStock(e.target.value)}
-                  />
-                </div>
                 <div className="">
                   <input
                     type="file"
@@ -176,17 +186,17 @@ const UpdateProduct = () => {
                     accept="image/"
                     onChange={createProductImageChange}
                     multiple
-                    className=" border"
+                    className="border "
                   />
                 </div>
-                <div className="flex gap-5  flex-wrap">
+                <div className="flex flex-wrap gap-5">
                   {oldImages &&
                     oldImages.map((image, index) => (
                       <img
                         src={image.url}
                         alt="Avatar Preview"
                         key={image}
-                        className=" w-20 h-20 "
+                        className="w-20 h-20 "
                       />
                     ))}
                   {imagePreview.map((image, index) => (
@@ -194,7 +204,7 @@ const UpdateProduct = () => {
                       src={image}
                       alt="Avatar Preview"
                       key={image}
-                      className=" w-20 h-20 "
+                      className="w-20 h-20 "
                     />
                   ))}
                 </div>
@@ -202,7 +212,7 @@ const UpdateProduct = () => {
                   onClick={updateProductSubmitHandler}
                   type="submit "
                   disabled={loading ? true : false}
-                  className="border p-3 bg-red-500 hover:bg-red-700 text-white font-roboto text-xl rounded-lg"
+                  className="p-3 text-xl text-white bg-red-500 border rounded-lg hover:bg-red-700 font-roboto"
                 >
                   Update
                 </button>

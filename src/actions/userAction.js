@@ -1,4 +1,6 @@
 import axios from "axios";
+import Cookies from "universal-cookie";
+
 import {
   LOGIN_FAIL,
   LOGIN_SUCCESS,
@@ -44,6 +46,7 @@ import {
 // axios.defaults.baseURL = "http://localhost:3001";
 
 axios.defaults.baseURL = BASE_URL;
+const cookies = new Cookies();
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -60,6 +63,10 @@ export const login = (email, password) => async (dispatch) => {
     );
     console.log("login response", response);
     // localStorage.setItem();
+    const token = response.data.token;
+    if (token) {
+      cookies.set("shophaventoken", token);
+    }
     dispatch({ type: LOGIN_SUCCESS, payload: response.data.user });
   } catch (error) {
     dispatch({ type: LOGIN_FAIL, payload: error.response.data.message });
@@ -69,12 +76,15 @@ export const login = (email, password) => async (dispatch) => {
 export const register = (UserData) => async (dispatch) => {
   try {
     dispatch({ type: REGISTER_USER_REQUEST });
-
     let config = {
       headers: { "Content-Type": "multipart/form-data" },
       withCredentials: true,
     };
     const response = await axios.post(`/api/v1/register`, UserData, config);
+    const token = response.data.token;
+    if (token) {
+      cookies.set("shophaventoken", token);
+    }
     dispatch({ type: REGISTER_USER_SUCCESS, payload: response.data.user });
   } catch (error) {
     dispatch({ type: REGISTER_USER_FAIL, payload: error.response.data });
@@ -87,8 +97,12 @@ export const loadUser = () => async (dispatch) => {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     };
+    const token = cookies.get("shophaventoken");
+    if (!token) {
+      throw new Error("not available");
+    }
     dispatch({ type: LOAD_USER_REQUEST });
-    const response = await axios.get(`/api/v1/me`, config);
+    const response = await axios.get(`/api/v1/me?token=${token}`, config);
     dispatch({ type: LOAD_USER_SUCCESS, payload: response?.data?.user });
   } catch (error) {
     dispatch({
@@ -104,6 +118,7 @@ export const logout = () => async (dispatch) => {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     };
+    cookies.remove("shophaventoken");
     await axios.get(`/api/v1/logout`, config);
     dispatch({ type: LOGOUT_SUCCESS });
   } catch (error) {
@@ -116,6 +131,7 @@ export const clearError = () => async (dispatch) => {
 
 //
 export const updateRole = (id, UpdatedRole) => async (dispatch) => {
+  const token = cookies.get("shophaventoken");
   try {
     dispatch({ type: UPDATE_USER_ROLE_REQUEST });
     let config = {
@@ -123,7 +139,7 @@ export const updateRole = (id, UpdatedRole) => async (dispatch) => {
       withCredentials: true,
     };
     const response = await axios.put(
-      `/api/v1/admin/user/${id}`,
+      `/api/v1/admin/user/${id}?token=${token}`,
       UpdatedRole,
       config
     );
@@ -135,6 +151,7 @@ export const updateRole = (id, UpdatedRole) => async (dispatch) => {
 
 //Update Profile
 export const updateProfile = (UserData) => async (dispatch) => {
+  const token = cookies.get("shophaventoken");
   try {
     dispatch({ type: UPDATE_PROFILE_REQUEST });
 
@@ -142,7 +159,11 @@ export const updateProfile = (UserData) => async (dispatch) => {
       headers: { "Content-Type": "multipart/form-data" },
       withCredentials: true,
     };
-    const { data } = await axios.put(`/api/v1/me/update`, UserData, config);
+    const { data } = await axios.put(
+      `/api/v1/me/update?token=${token}`,
+      UserData,
+      config
+    );
     dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.success });
   } catch (error) {
     dispatch({
@@ -153,6 +174,7 @@ export const updateProfile = (UserData) => async (dispatch) => {
 };
 
 export const changePassword = (UpdatedPassword) => async (dispatch) => {
+  const token = cookies.get("shophaventoken");
   try {
     dispatch({ type: UPDATE_PASSWORD_REQUEST });
     let config = {
@@ -160,7 +182,7 @@ export const changePassword = (UpdatedPassword) => async (dispatch) => {
       withCredentials: true,
     };
     const response = await axios.put(
-      `/api/v1/password/update`,
+      `/api/v1/password/update?token=${token}`,
       UpdatedPassword,
       config
     );
@@ -172,6 +194,7 @@ export const changePassword = (UpdatedPassword) => async (dispatch) => {
 
 //Forgot Password
 export const forgotPassword = (email) => async (dispatch) => {
+  const token = cookies.get("shophaventoken");
   try {
     dispatch({ type: FORGOT_PASSWORD_REQUEST });
     let config = {
@@ -180,7 +203,7 @@ export const forgotPassword = (email) => async (dispatch) => {
     };
 
     const response = await axios.post(
-      `/api/v1/password/forgot`,
+      `/api/v1/password/forgot?token=${token}`,
       { email },
       config
     );
@@ -198,13 +221,17 @@ export const forgotPassword = (email) => async (dispatch) => {
 };
 //Get all userss
 export const getallUser = () => async (dispatch) => {
+  const token = cookies.get("shophaventoken");
   let config = {
     headers: { "Content-Type": "application/json" },
     withCredentials: true,
   };
   try {
     dispatch({ type: ALL_USER_REQUEST });
-    const response = await axios.get(`/api/v1/admin/users`, config);
+    const response = await axios.get(
+      `/api/v1/admin/users?token=${token}`,
+      config
+    );
     dispatch({ type: ALL_USER_SUCCESS, payload: response.data.users });
   } catch (error) {
     dispatch({ type: ALL_USER_FAIL, payload: error.response.data.message });
@@ -212,13 +239,17 @@ export const getallUser = () => async (dispatch) => {
 };
 //Get user detail
 export const getUserDetail = (id) => async (dispatch) => {
+  const token = cookies.get("shophaventoken");
   try {
     let config = {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     };
     dispatch({ type: USER_DETAIL_REQUEST });
-    const response = await axios.get(`/api/v1/admin/user/${id}`, config);
+    const response = await axios.get(
+      `/api/v1/admin/user/${id}?token=${token}`,
+      config
+    );
     dispatch({ type: USER_DETAIL_SUCCESS, payload: response.data.user });
   } catch (error) {
     dispatch({
@@ -230,6 +261,7 @@ export const getUserDetail = (id) => async (dispatch) => {
 
 //Update User
 export const updateUser = (id, UserData) => async (dispatch) => {
+  const token = cookies.get("shophaventoken");
   try {
     dispatch({ type: UPDATE_USER_REQUEST });
 
@@ -238,7 +270,7 @@ export const updateUser = (id, UserData) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.put(
-      `/api/v1/admin/user/${id}`,
+      `/api/v1/admin/user/${id}?token=${token}`,
       UserData,
       config
     );
@@ -253,13 +285,17 @@ export const updateUser = (id, UserData) => async (dispatch) => {
 
 //Delete User
 export const deleteUser = (id) => async (dispatch) => {
+  const token = cookies.get("shophaventoken");
   try {
     dispatch({ type: DELETE_USER_REQUEST });
     let config = {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     };
-    const { data } = await axios.delete(`/api/v1/admin/user/${id}`, config);
+    const { data } = await axios.delete(
+      `/api/v1/admin/user/${id}?token=${token}`,
+      config
+    );
     dispatch({ type: DELETE_USER_SUCCESS, payload: data });
   } catch (error) {
     dispatch({

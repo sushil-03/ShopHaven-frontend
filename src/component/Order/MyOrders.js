@@ -78,15 +78,19 @@ const MyOrders = () => {
       dispatch(clearError());
     }
     dispatch(myOrders());
-  }, [dispatch, error, alert]);
+    return () => dispatch(clearError());
+  }, [alert, dispatch, error]);
   return (
     <div>
       <MetaData title={`${user.name} - Orders`}></MetaData>
       {loading ? (
         <Loader />
       ) : (
-        <div className="container  w-full  h-screen rounded-lg border-2  m-auto shadow-2xl overflow-scroll ">
-          <h1 className="p-4 mb-4 font-bold text-3xl font-roboto">Cart Info</h1>
+        <div className="container w-full h-screen m-auto overflow-scroll border-2 rounded-lg shadow-2xl ">
+          <h1 className="p-4 mb-4 text-3xl font-bold font-roboto">
+            {" "}
+            Order Info
+          </h1>
           <DataGrid
             rows={row}
             columns={column}
